@@ -68,9 +68,20 @@ onkeydown = function(event){
 }
 
 function eatFood() {
-    food.x = Math.floor((Math.random() * 450));
-    food.y = Math.floor((Math.random() * 450));
+    var onTail = true;
+
     addTail();
+    while (onTail) {
+        food.x = Math.floor((Math.random() * 450));
+        food.y = Math.floor((Math.random() * 450));
+        onTail = false;
+        for (var i=0; i<tail.length; i++) {
+            if (food.x >= (tail[i].x - 20) && food.x <= (tail[i].x + 20) && food.y >= (tail[i].y - 20) && food.y <= (tail[i].y + 20)) {
+                onTail = true;
+                break;
+            }
+        }
+    }
 }
 
 function checkGameOver() {
